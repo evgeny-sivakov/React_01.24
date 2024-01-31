@@ -4,7 +4,7 @@ import { PageContent } from '../components/layouts/PageContent'
 const inputs = [
   {
     id: 'number',
-    options: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'],
+    options: ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'],
     label: 'How many questions?',
     key: 'i0'
   },
