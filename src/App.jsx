@@ -1,7 +1,8 @@
-import './App.css';
+import './App.css'
+import { Welcome } from './pages/Welcome'
 
 function App() {
-  return <p>Hello</p>;
+  return <Welcome  />
 }
 
-export default App;
+export default App
