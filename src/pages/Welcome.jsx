@@ -1,5 +1,6 @@
 import { WelcomeForm } from '../components/WelcomeForm'
 import { PageContent } from '../components/layouts/PageContent'
+import { ContentContainer } from '../components/layouts/ContentContainer'
 
 const inputs = [
   {
@@ -37,8 +38,10 @@ const inputs = [
 export const Welcome = () => {
   return (
     <PageContent title="Choose Your Quiz!">
-      <WelcomeForm inputs={inputs} />
-      <a href="#">See my statistics</a>
+      <ContentContainer>
+        <WelcomeForm inputs={inputs} />
+        <a href="#">See my statistics</a>
+      </ContentContainer>
     </PageContent>
   )
 }

@@ -9,8 +9,13 @@ a {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-image: url('./assets/monochrome-banner-template-with-hands-people-solving-puzzle-riddle-quiz-tournament-knowledge-competition-intelligence-test-smart-game-elements-vector-illustration-line-art-style_198278-8719.jpg');
-    background-size: auto;
+    font-family: 'Martian Mono', monospace;
+    color: oklch(1 0 0);
+    background-image: url('./assets/bg-dark-static-5afe6f0008301185cab71ae1746511b0.jpeg');
     background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+button {
+    font-family: 'Martian Mono', monospace;
 }
