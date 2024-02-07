@@ -3,33 +3,25 @@
     flex-direction: column;
     align-items: center;
     gap: 25px;
-/*     width: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-    padding: 24px;
-    border: 1px solid rgb(0, 0, 92);
-    border-radius: 8px;
-    background-color: #99d2ff;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-
 }
 
 select {
-    width: 200px;
+    width: 300px;
     height: 40px;
     border-radius: 8px;
     padding: 8px;
+    font-family: 'Martian Mono', monospace;
 }
 
 .button {
-    width: 150px;
-    height: 40px;
-    border: 1px solid grey;
-    border-radius: 8px;
+    background-color: oklch(0.728 0.155 249.85);
+    color: oklch(0 0 0);
     font-size: large;
-    background-color: rgb(249, 196, 204);
-    color: #008efb;
     text-transform: uppercase;
 }
+
+.button:hover {
+    background-color: oklch(0.728 0.155 249.85 / 0.3);
+    color: oklch(0.728 0.155 249.85);
+}
+
