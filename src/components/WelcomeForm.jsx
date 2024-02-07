@@ -1,4 +1,5 @@
 import { SelectInput } from './SelectInput'
+import { Button } from './Button'
 
 import classes from './WelcomeForm.module.css'
 
@@ -8,9 +9,7 @@ export const WelcomeForm = ({ inputs }) => {
       {inputs.map(({ id, options, label, key }) => (
         <SelectInput key={key} id={id} options={options} label={label} />
       ))}
-      <button className={classes.button} type="submit">
-        Start Quiz
-      </button>
+      <Button className={classes.button} text="Start Quiz" type="submit"></Button>
     </form>
   )
 }
