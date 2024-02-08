@@ -11,12 +11,12 @@ const QUIZ_CONFIG = {
   questionsAmount: 10,
   category: 'Entertainment: Books',
   type: 'Multiple choise',
-  duration: '2',
+  time: '2',
   difficulty: 'easy'
 }
 
 function App() {
-  return <QuizResultPage time="1.25" result="5" quizConfig={QUIZ_CONFIG} />
+  return <QuizResultPage resultTime="1.25" result="5" quizConfig={QUIZ_CONFIG} />
 }
 
 export default App
