@@ -1,7 +1,8 @@
-import { Button } from './Button'
+import Button from './Button'
+
 import classes from './Question.module.css'
 
-export const Question = ({ questions }) => {
+const Question = ({ questions }) => {
   return (
     <div className={classes.container}>
       <p className={classes.timer}>{`Time left: ${2}min`}</p>
@@ -16,3 +17,5 @@ export const Question = ({ questions }) => {
     </div>
   )
 }
+
+export default Question

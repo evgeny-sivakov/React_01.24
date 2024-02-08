@@ -38,7 +38,6 @@
 .answerButton {
     background-color: oklch(1 0 0 / 0.5);
     color: oklch(1 0 0);
-    transition: 0.15s ease-in-out;
 }
 
 .answerButton:hover {

@@ -1,5 +1,4 @@
-import { Welcome } from './pages/Welcome'
-//import { Quiz } from './pages/Quiz'
+import QuizResultPage from './pages/QuizResultPage'
 
 /* const QUESTIONS = [
   {
@@ -8,8 +7,16 @@ import { Welcome } from './pages/Welcome'
   }
 ] */
 
+const QUIZ_CONFIG = {
+  questionsAmount: 10,
+  category: 'Entertainment: Books',
+  type: 'Multiple choise',
+  duration: '2',
+  difficulty: 'easy'
+}
+
 function App() {
-  return <Welcome />
+  return <QuizResultPage time="1.25" result="5" quizConfig={QUIZ_CONFIG} />
 }
 
 export default App

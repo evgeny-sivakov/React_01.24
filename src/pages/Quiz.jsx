@@ -1,8 +1,8 @@
-import { PageContent } from '../components/layouts/PageContent'
-import { ContentCard } from '../components/layouts/ContentCard'
-import { Question } from '../components/Question'
+import PageContent from '../components/layouts/PageContent'
+import ContentCard from '../components/layouts/ContentCard'
+import Question from '../components/Question'
 
-export const Quiz = ({ questions }) => {
+const Quiz = ({ questions }) => {
   return (
     <PageContent title="Quiz page!">
       <ContentCard>
@@ -11,3 +11,5 @@ export const Quiz = ({ questions }) => {
     </PageContent>
   )
 }
+
+export default Quiz

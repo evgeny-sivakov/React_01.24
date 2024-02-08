@@ -1,9 +1,9 @@
-import { SelectInput } from './SelectInput'
-import { Button } from './Button'
+import SelectInput from './SelectInput'
+import Button from './Button'
 
 import classes from './WelcomeForm.module.css'
 
-export const WelcomeForm = ({ inputs }) => {
+const WelcomeForm = ({ inputs }) => {
   return (
     <form className={classes.form}>
       {inputs.map(({ id, options, label, key }) => (
@@ -13,3 +13,5 @@ export const WelcomeForm = ({ inputs }) => {
     </form>
   )
 }
+
+export default WelcomeForm
