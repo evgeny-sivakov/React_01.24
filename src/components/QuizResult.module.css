@@ -45,6 +45,7 @@ p {
     background-color: oklch(1 0 0 );
     color: oklch(0.505289 0.2073 29.2339);
     text-transform: uppercase;
+    font-size: medium;
 }
 
 .quiz-result-grid button:hover {
@@ -58,6 +59,7 @@ p {
     justify-self: flex-start;
     padding: 8px;
     color: oklch(0.728 0.155 249.85);
+    font-size: medium;
     transition: 0.15s ease-in-out;
 }
 

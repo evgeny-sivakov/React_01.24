@@ -1,5 +1,6 @@
 .contentCard {
     width: fit-content;
+    max-width: 800px;
     padding: 48px;
     border-radius: 8px;
     background-color: transparent;
