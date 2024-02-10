@@ -1,4 +1,4 @@
-export const SelectInput = ({ id, options, label }) => {
+const SelectInput = ({ id, options, label }) => {
   return (
     <select name={id} id={id} aria-label={label}>
       <option value="">{label}</option>
@@ -12,3 +12,5 @@ export const SelectInput = ({ id, options, label }) => {
     </select>
   )
 }
+
+export default SelectInput

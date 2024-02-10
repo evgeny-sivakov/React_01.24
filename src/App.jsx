@@ -1,15 +1,12 @@
-import { Welcome } from './pages/Welcome'
-//import { Quiz } from './pages/Quiz'
-
-/* const QUESTIONS = [
-  {
-    question: 'A flashing red traffic light signifies that a driver should do what?',
-    answers: ['stop', 'speed up', 'proceed with caution', 'honk the horn']
-  }
-] */
+import { QuizContextProvider } from './store/QuizContextProvider'
+import QuizResultPage from './pages/QuizResultPage'
 
 function App() {
-  return <Welcome />
+  return (
+    <QuizContextProvider>
+      <QuizResultPage />
+    </QuizContextProvider>
+  )
 }
 
 export default App
