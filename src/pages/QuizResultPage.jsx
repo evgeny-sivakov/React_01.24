@@ -1,14 +1,14 @@
-import PageContent from '../components/layouts/PageContent'
 import ContentCard from '../components/layouts/ContentCard'
 import QuizResult from '../components/QuizResult'
 
 const QuizResultPage = () => {
   return (
-    <PageContent title="Quiz Result!">
+    <section className="main-section">
+      <h1>Result Page!</h1>
       <ContentCard>
         <QuizResult />
       </ContentCard>
-    </PageContent>
+    </section>
   )
 }
 

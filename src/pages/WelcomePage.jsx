@@ -1,5 +1,4 @@
 import Welcome from '../components/Welcome'
-import PageContent from '../components/layouts/PageContent'
 import ContentCard from '../components/layouts/ContentCard'
 
 const inputs = [
@@ -37,11 +36,12 @@ const inputs = [
 
 const WelcomePage = () => {
   return (
-    <PageContent title="Choose Your Quiz!">
+    <section className="main-section">
+      <h1>Choose your quiz!</h1>
       <ContentCard>
         <Welcome inputs={inputs} />
       </ContentCard>
-    </PageContent>
+    </section>
   )
 }
 

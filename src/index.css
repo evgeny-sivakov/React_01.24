@@ -21,3 +21,15 @@ button {
     font-family: 'Martian Mono', monospace;
     transition: 0.15s ease-in-out;
 }
+
+.main-section {
+    padding-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.main-section h1 {
+    font-size: 32px;
+    text-align: center;
+}

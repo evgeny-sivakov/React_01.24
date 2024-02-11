@@ -1,11 +1,10 @@
-import classes from './PageContent.module.css'
+import { Outlet } from 'react-router-dom'
 
-const PageContent = ({ title, children }) => {
+const PageContent = () => {
   return (
-    <div className={classes.content}>
-      <h1 className={classes.title}>{title}</h1>
-      {children}
-    </div>
+    <main>
+      <Outlet />
+    </main>
   )
 }
 

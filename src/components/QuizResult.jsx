@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { QuizContext } from '../store/quiz-context'
 
 import Button from './Button'
@@ -9,6 +10,11 @@ const RESULT_CONFIG = ['Category', 'Type', 'Time', 'Difficulty']
 
 const QuizResult = () => {
   const { quizConfig, correctAnswers, remainingTime } = useContext(QuizContext)
+  const navigate = useNavigate()
+
+  const onRestart = () => {
+    navigate('/quiz')
+  }
 
   return (
     <div className={classes['quiz-result-grid']}>
@@ -31,8 +37,8 @@ const QuizResult = () => {
         </ul>
       </div>
 
-      <a href="#">Choose another quiz</a>
-      <Button text="Restart" />
+      <Link to="/">Choose another quiz</Link>
+      <Button onClick={onRestart} text="Restart" />
     </div>
   )
 }
