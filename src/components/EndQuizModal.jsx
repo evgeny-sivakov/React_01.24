@@ -1,4 +1,5 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 
 import classes from './EndQuizModal.module.css'
@@ -18,14 +19,15 @@ const EndQuizModal = forwardRef(function Modal(props, ref) {
   function confirmationHanlder() {
     navigate('/')
   }
-  return (
+  return createPortal(
     <dialog ref={dialog} className={classes.dialog}>
       <p>Do you want to finish this quiz?</p>
       <form method="dialog">
         <Button text="Cancel" type="submit" />
         <Button text="Confirm" type="button" onClick={confirmationHanlder} />
       </form>
-    </dialog>
+    </dialog>,
+    document.getElementById('modal')
   )
 })
 
