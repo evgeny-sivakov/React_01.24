@@ -4,7 +4,7 @@ import classes from './Timer.module.css'
 
 const twoDigits = (num) => String(num).padStart(2, '0')
 
-const Timer = ({ time }) => {
+const Timer = ({ time, onTimeExpired }) => {
   const [secondsRemaining, setSecondsRemaining] = useState(time * 60)
 
   const secondsToDisplay = secondsRemaining % 60
@@ -17,12 +17,14 @@ const Timer = ({ time }) => {
       interval.current = setInterval(() => {
         setSecondsRemaining((prev) => prev - 1)
       }, 1000)
+    } else {
+      onTimeExpired()
     }
 
     return () => {
       clearInterval(interval.current)
     }
-  }, [secondsRemaining])
+  }, [secondsRemaining, onTimeExpired])
 
   return (
     <div className={classes.timer}>

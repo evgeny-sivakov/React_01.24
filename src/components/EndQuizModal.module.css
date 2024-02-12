@@ -1,0 +1,19 @@
+.dialog[open] {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: auto;
+    padding: 24px;
+    border: none;
+    border-radius: 8px;
+}
+
+.dialog::backdrop {
+   backdrop-filter: blur(10px);
+}
+
+form {
+    display: flex;
+    gap: 16px;
+    align-self: flex-end;
+}

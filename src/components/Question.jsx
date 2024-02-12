@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { QuizContext } from '../store/quiz-context'
 
 import Button from './Button'
@@ -97,6 +98,8 @@ const Question = () => {
   const { countCorrectAnswer, countAnswer } = useContext(QuizContext)
   const [questionIndex, setQuestionIndex] = useState(0)
 
+  const navigate = useNavigate()
+
   function answerSubmitHandler(event) {
     event.preventDefault()
 
@@ -104,13 +107,13 @@ const Question = () => {
       target: { innerText }
     } = event
 
-    if (innerText === correct_answer) {
-      countCorrectAnswer()
-    } else {
-      countAnswer()
-    }
+    innerText === correct_answer ? countCorrectAnswer() : countAnswer()
 
-    setQuestionIndex((prev) => prev + 1)
+    if (response.length - 1 > questionIndex) {
+      setQuestionIndex((prev) => prev + 1)
+    } else {
+      navigate('/results')
+    }
   }
 
   const { question, correct_answer, incorrect_answers } = response[questionIndex]
