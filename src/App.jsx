@@ -1,7 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import { QuizContextProvider } from './store/QuizContextProvider'
-
 import PageContent from './components/layouts/PageContent'
 import WelcomePage from './pages/WelcomePage'
 import QuizPage from './pages/QuizPage'
@@ -22,13 +20,7 @@ const router = createBrowserRouter([
 ])
 
 function App() {
-  return (
-    <>
-      <QuizContextProvider>
-        <RouterProvider router={router} />
-      </QuizContextProvider>
-    </>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App

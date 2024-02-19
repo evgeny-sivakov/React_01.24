@@ -1,4 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { quizActions } from '../store/quiz'
+import convertSecondsToDisplay from '../utils/convertSecondsToDisplay'
 
 import classes from './Timer.module.css'
 
@@ -7,10 +11,10 @@ const twoDigits = (num) => String(num).padStart(2, '0')
 const Timer = ({ time, onTimeExpired }) => {
   const [secondsRemaining, setSecondsRemaining] = useState(time * 60)
 
-  const secondsToDisplay = secondsRemaining % 60
-  const minutesToDisplay = (secondsRemaining - secondsToDisplay) / 60
+  const { minutes, seconds } = convertSecondsToDisplay(secondsRemaining)
 
   const interval = useRef()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (secondsRemaining > 0) {
@@ -22,13 +26,14 @@ const Timer = ({ time, onTimeExpired }) => {
     }
 
     return () => {
+      dispatch(quizActions.setRemainingTime(secondsRemaining))
       clearInterval(interval.current)
     }
-  }, [secondsRemaining, onTimeExpired])
+  }, [secondsRemaining, onTimeExpired, dispatch])
 
   return (
     <div className={classes.timer}>
-      {twoDigits(minutesToDisplay)}:{twoDigits(secondsToDisplay)}
+      {twoDigits(minutes)}:{twoDigits(seconds)}
     </div>
   )
 }
