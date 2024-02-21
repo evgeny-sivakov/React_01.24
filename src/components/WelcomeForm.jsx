@@ -29,7 +29,6 @@ const WelcomeForm = ({ inputs }) => {
     }
 
     const convertedData = convertFormData(configData)
-    console.log(convertedData)
 
     dispatch(configActions.set(convertedData))
     navigate('quiz')
