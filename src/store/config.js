@@ -15,7 +15,7 @@ const configSlice = createSlice({
   reducers: {
     set: (state, action) => {
       const { time, amount, difficulty, category, type, categoryID } = action.payload
-      console.log(action.payload)
+
       state.amount = amount
       state.time = time
       state.category = category
@@ -25,6 +25,7 @@ const configSlice = createSlice({
     },
     reset(state) {
       const { time, type, difficulty, category, amount, categoryID } = initialState
+
       state.amount = amount
       state.time = time
       state.type = type

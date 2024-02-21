@@ -17,7 +17,9 @@ const Question = ({ questions }) => {
 
   const { question, correct_answer, incorrect_answers } = questions[questionIndex]
   const answersToDisplay =
-    type === 'multiple' ? shuffle([...incorrect_answers, correct_answer]) : ['True', 'False']
+    type === 'multiple'
+      ? shuffle([...incorrect_answers, correct_answer])
+      : [...incorrect_answers, correct_answer]
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -44,7 +46,6 @@ const Question = ({ questions }) => {
 
   return (
     <>
-      {console.log('question rerender')}
       <p className={classes.question}>{question}</p>
       <form className={classes.grid}>
         {answersToDisplay.map((answer) => (

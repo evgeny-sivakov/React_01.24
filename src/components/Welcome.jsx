@@ -32,8 +32,8 @@ const inputs = [
   },
   {
     inputID: 'time',
-    options: [1, 2, 5],
-    label: 'Define quiz duration in minutes',
+    options: ['1 minute', '2 minutes', '5minutes'],
+    label: 'Define quiz duration',
     key: 'i4'
   }
 ]

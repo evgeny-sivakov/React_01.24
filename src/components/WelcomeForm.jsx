@@ -5,6 +5,7 @@ import { configActions } from '../store/config'
 
 import SelectInput from './SelectInput'
 import Button from './Button'
+import convertFormData from '../utils/convertFormData'
 
 import classes from './WelcomeForm.module.css'
 
@@ -20,17 +21,17 @@ const WelcomeForm = ({ inputs }) => {
 
     const currentCategoryID = inputs
       .find((input) => input.inputID === 'category')
-      .options.find((opt) => opt.name === data.category).id
-    const convertedType = data.type === 'Multiple Choice' ? 'multiple' : 'boolean'
-    const convertedDif = data.difficulty.toLowerCase()
+      .options.find((opt) => opt.name === data.category)?.id
+
     const configData = {
       ...data,
-      type: convertedType,
-      categoryID: currentCategoryID + '',
-      difficulty: convertedDif
+      categoryID: currentCategoryID
     }
 
-    dispatch(configActions.set(configData))
+    const convertedData = convertFormData(configData)
+    console.log(convertedData)
+
+    dispatch(configActions.set(convertedData))
     navigate('quiz')
   }
 
