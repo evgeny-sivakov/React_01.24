@@ -1,8 +1,15 @@
-const SelectInput = ({ id, options, label }) => {
+const SelectInput = ({ inputID, options, label }) => {
   return (
-    <select name={id} id={id} aria-label={label}>
-      <option value="">{label}</option>
+    <select name={inputID} id={inputID} aria-label={label}>
+      <option value={label}>{label}</option>
       {options.map((opt) => {
+        if (typeof opt === 'object') {
+          return (
+            <option id={opt.id} key={opt.id} value={opt.name}>
+              {opt.name}
+            </option>
+          )
+        }
         return (
           <option key={opt} value={opt}>
             {opt}

@@ -1,0 +1,9 @@
+.question-counter {
+    width: fit-content;
+    grid-column: 2;
+    justify-self: flex-end;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: oklch(0.967651 0.0158 73.6821);
+    color: oklch(0.263807 0.0336 281.371);
+}
