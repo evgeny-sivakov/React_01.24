@@ -7,7 +7,7 @@ import Button from './Button'
 import Timer from './Timer'
 import EndQuizModal from './EndQuizModal'
 import QuestionCounter from './QuestionCounter'
-import { getConfigData } from '../utils/getConfigData'
+import { useConfigData } from '../hooks/useConfigData'
 
 import classes from './Question.module.css' // split style file
 
@@ -22,9 +22,8 @@ const Quiz = () => {
       incorrect_answers: []
     }
   ])
-  const config = useSelector((state) => state.config)
-  const { url } = getConfigData('FETCH', config)
-  console.log(url)
+  const time = useSelector((state) => state.config.time)
+  const { url } = useConfigData()
   const modal = useRef()
   const navigate = useNavigate()
 
@@ -41,7 +40,7 @@ const Quiz = () => {
       setQuestions(newQuestions)
     }
     fetchQuestions().catch((error) => console.log(error))
-  }, [])
+  }, [url])
 
   function endQuizHandler() {
     modal.current.open()
@@ -55,7 +54,7 @@ const Quiz = () => {
     <>
       <EndQuizModal ref={modal} />
       <section className={classes.container}>
-        <Timer onTimeExpired={onTimerExpired} time={config.time} />
+        <Timer onTimeExpired={onTimerExpired} time={time} />
         <QuestionCounter questionsLength={questions.length} />
         <Question questions={questions} />
         <Button onClick={endQuizHandler} className={classes.endButton} text="End Quiz!" />
