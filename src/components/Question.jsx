@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Button from './Button'
 import { quizActions } from '../store/quiz'
+import { statisticsActions } from '../store/statistics'
 
 import classes from './Question.module.css'
 
@@ -13,11 +14,11 @@ const shuffle = (array) => {
 
 const Question = ({ questions }) => {
   const [questionIndex, setQuestionIndex] = useState(0)
-  const type = useSelector((state) => state.config.type)
+  const config = useSelector((state) => state.config)
 
   const { question, correct_answer, incorrect_answers } = questions[questionIndex]
   const answersToDisplay =
-    type === 'multiple'
+    config.type === 'multiple'
       ? shuffle([...incorrect_answers, correct_answer])
       : [...incorrect_answers, correct_answer]
 
@@ -37,9 +38,16 @@ const Question = ({ questions }) => {
       dispatch(quizActions.countAnswer())
     }
 
-    if (questions.length - 1 > questionIndex) {
+    if (questionIndex < questions.length - 1) {
       setQuestionIndex((prev) => prev + 1)
     } else {
+      dispatch(
+        statisticsActions.updateStats({
+          config,
+          questions,
+          quantity: questionIndex + 1
+        })
+      )
       navigate('/results')
     }
   }
