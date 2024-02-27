@@ -1,13 +1,20 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 import classes from './EndQuizModal.module.css'
 import Button from './Button'
 
+import { quizActions } from '../store/quiz'
+
 const EndQuizModal = forwardRef(function Modal(props, ref) {
+  const correctAnswers = useSelector((state) => state.quiz.correctAnswers)
+
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const dialog = useRef()
+
   useImperativeHandle(ref, () => {
     return {
       open() {
@@ -17,6 +24,7 @@ const EndQuizModal = forwardRef(function Modal(props, ref) {
   })
 
   function confirmationHanlder() {
+    dispatch(quizActions.reset(correctAnswers))
     navigate('/')
   }
   return createPortal(

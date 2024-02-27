@@ -91,9 +91,18 @@ const statisticsSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase('quiz/countCorrectAnswer', (state) => {
-      state.correctAnswers += 1
-    })
+    builder
+      .addCase('quiz/countCorrectAnswer', (state) => {
+        state.correctAnswers += 1
+      })
+      .addCase('quiz/reset', (state, action) => {
+        console.log(action.payload)
+        if (action.payload) {
+          state.correctAnswers -= action.payload
+        } else {
+          state.correctAnswers
+        }
+      })
   }
 })
 
