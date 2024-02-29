@@ -1,6 +1,8 @@
 import { useRef, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { decode } from 'html-entities'
 
 import Question from './Question'
 import Button from './Button'
@@ -8,6 +10,7 @@ import Timer from './Timer'
 import EndQuizModal from './EndQuizModal'
 import QuestionCounter from './QuestionCounter'
 import { useConfigData } from '../hooks/useConfigData'
+import { quizActions } from '../store/quiz'
 
 import classes from './Question.module.css' // split style file
 
@@ -23,9 +26,12 @@ const Quiz = () => {
     }
   ])
   const time = useSelector((state) => state.config.time)
+  const correctAnswers = useSelector((state) => state.quiz.correctAnswers)
   const { url } = useConfigData()
+
   const modal = useRef()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -37,7 +43,20 @@ const Quiz = () => {
 
       const responseData = await response.json()
       const newQuestions = responseData.results
-      setQuestions(newQuestions)
+      const decodedQuestions = newQuestions.map((question) => {
+        const decodedCategory = question.category
+        const decodedQuestion = decode(question.question)
+        const decodedCorrectAnswer = decode(question.correct_answer)
+        const decodedIncorrectAnswers = question.incorrect_answers.map((item) => decode(item))
+        return {
+          ...question,
+          correct_answer: decodedCorrectAnswer,
+          incorrect_answers: decodedIncorrectAnswers,
+          question: decodedQuestion,
+          category: decodedCategory
+        }
+      })
+      setQuestions(decodedQuestions)
     }
     fetchQuestions().catch((error) => console.log(error))
   }, [url])
@@ -47,6 +66,7 @@ const Quiz = () => {
   }
 
   function onTimerExpired() {
+    dispatch(quizActions.reset(correctAnswers))
     navigate('/results')
   }
 
