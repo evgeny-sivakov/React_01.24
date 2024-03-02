@@ -44,7 +44,7 @@ const Quiz = () => {
       const responseData = await response.json()
       const newQuestions = responseData.results
       const decodedQuestions = newQuestions.map((question) => {
-        const decodedCategory = question.category
+        const decodedCategory = decode(question.category)
         const decodedQuestion = decode(question.question)
         const decodedCorrectAnswer = decode(question.correct_answer)
         const decodedIncorrectAnswers = question.incorrect_answers.map((item) => decode(item))
