@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Button from './Button'
 import { quizActions } from '../store/quiz'
-import { statisticsActions } from '../store/statistics'
+import { updateStatisticsData } from '../store/statistics'
 
 import classes from './Question.module.css'
 
@@ -41,13 +41,7 @@ const Question = ({ questions }) => {
     if (questionIndex < questions.length - 1) {
       setQuestionIndex((prev) => prev + 1)
     } else {
-      dispatch(
-        statisticsActions.updateStats({
-          config,
-          questions,
-          quantity: questionIndex + 1
-        })
-      )
+      dispatch(updateStatisticsData({ questions, quantity: questionIndex + 1 }))
       navigate('/results')
     }
   }

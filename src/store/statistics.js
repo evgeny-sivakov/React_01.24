@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 const initialState = {
   totalQuantity: 0,
@@ -22,86 +22,99 @@ const initialState = {
   }
 }
 
+export const updateStatisticsData = createAsyncThunk(
+  'statistics/updateStatisticsData',
+  async ({ questions, quantity }, { getState }) => {
+    const {
+      config: { type, difficulty, category }
+    } = getState()
+    const statistics = getState().statistics
+    const newStats = JSON.parse(JSON.stringify(statistics))
+
+    if (type === 'Any') {
+      questions.forEach(({ type }) => {
+        const currentTypeObj = newStats.type.byName.find((stateType) => stateType.name === type)
+        currentTypeObj.quantity += 1
+      })
+    } else {
+      const currentTypeObj = newStats.type.byName.find((stateType) => stateType.name === type)
+      currentTypeObj.quantity += quantity
+    }
+
+    if (difficulty === 'Any') {
+      questions.forEach(({ difficulty }) => {
+        const currentDifficultyObj = newStats.difficulty.byName.find(
+          (stateDifficulty) => stateDifficulty.name === difficulty
+        )
+        currentDifficultyObj.quantity += 1
+      })
+    } else {
+      const currentDifficultyObj = newStats.difficulty.byName.find(
+        (stateDifficulty) => stateDifficulty.name === difficulty
+      )
+
+      currentDifficultyObj.quantity += quantity
+    }
+
+    if (category === 'Any') {
+      questions.forEach(({ category }) => {
+        const currentCategoryObj = newStats.categories.allNames.includes(category)
+
+        if (currentCategoryObj) {
+          const existedCategory = newStats.categories.byName.find((obj) => obj.name === category)
+
+          existedCategory.quantity += 1
+        } else {
+          newStats.categories.byName.push({
+            name: category,
+            quantity: 1
+          })
+          newStats.categories.allNames.push(category)
+        }
+      })
+    } else {
+      const currentCategoryObj = newStats.categories.allNames.includes(category)
+
+      if (currentCategoryObj) {
+        const category = newStats.categories.byName.find((category) => category.name === category)
+
+        category.quantity += quantity
+      } else {
+        newStats.categories.byName.push({
+          name: category,
+          quantity: quantity
+        })
+        newStats.categories.allNames.push(category)
+      }
+    }
+
+    newStats.totalQuantity += quantity
+    return newStats
+  }
+)
+
 const statisticsSlice = createSlice({
   name: 'statistics',
   initialState,
-  reducers: {
-    updateStats(state, { payload }) {
-      const { type, difficulty, category } = payload.config
-
-      if (type === 'Any') {
-        payload.questions.forEach(({ type }) => {
-          const currentStateType = state.type.byName.find((stateType) => stateType.name === type)
-          currentStateType.quantity += 1
-        })
-      } else {
-        const currentStateType = state.type.byName.find((stateType) => stateType.name === type)
-
-        currentStateType.quantity += payload.quantity
-      }
-
-      if (difficulty === 'Any') {
-        payload.questions.forEach(({ difficulty }) => {
-          const currentStateDifficulty = state.difficulty.byName.find(
-            (stateDifficulty) => stateDifficulty.name === difficulty
-          )
-          currentStateDifficulty.quantity += 1
-        })
-      } else {
-        const currentStateDifficulty = state.difficulty.byName.find(
-          (stateDifficulty) => stateDifficulty.name === difficulty
-        )
-
-        currentStateDifficulty.quantity += payload.quantity
-      }
-
-      if (category === 'Any') {
-        payload.questions.forEach(({ category }) => {
-          const currentStateCategory = state.categories.allNames.includes(category)
-
-          if (currentStateCategory) {
-            const existedCategory = state.categories.byName.find((obj) => obj.name === category)
-
-            existedCategory.quantity += 1
-          } else {
-            state.categories.byName.push({
-              name: category,
-              quantity: 1
-            })
-            state.categories.allNames.push(category)
-          }
-        })
-      } else {
-        const currentCategory = state.categories.allNames.includes(category)
-
-        if (currentCategory) {
-          const category = state.categories.byName.find((category) => category.name === category)
-
-          category.quantity += payload.quantity
-        } else {
-          state.categories.byName.push({
-            name: category,
-            quantity: payload.quantity
-          })
-          state.categories.allNames.push(category)
-        }
-      }
-
-      state.totalQuantity += payload.quantity
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase('quiz/countCorrectAnswer', (state) => {
         state.correctAnswers += 1
       })
       .addCase('quiz/reset', (state, action) => {
-        console.log(action.payload)
         if (action.payload) {
           state.correctAnswers -= action.payload
         } else {
           state.correctAnswers
         }
+      })
+      .addCase(updateStatisticsData.fulfilled, (state, action) => {
+        const { type, difficulty, categories, totalQuantity } = action.payload
+        state.type = type
+        state.difficulty = difficulty
+        state.categories = categories
+        state.totalQuantity = totalQuantity
       })
   }
 })
