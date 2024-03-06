@@ -10,7 +10,6 @@ import { quizActions } from '../store/quiz'
 
 import classes from './QuizResult.module.css'
 
-
 const QuizResult = () => {
   const { correctAnswers, answers, remainingTime } = useAppSelector((state) => state.quiz)
   const quizConfig = useAppSelector((state) => state.config)
@@ -44,13 +43,13 @@ const QuizResult = () => {
             Category: <span>{quizConfig.category}</span>
           </li>
           <li className={classes['category__name']}>
-          Type: <span>{quizConfig.type}</span>
+            Type: <span>{quizConfig.type}</span>
           </li>
           <li className={classes['category__name']}>
-          Time: <span>{quizConfig.time}</span>
+            Time: <span>{quizConfig.time}</span>
           </li>
           <li className={classes['category__name']}>
-          Difficulty: <span>{quizConfig.difficulty}</span>
+            Difficulty: <span>{quizConfig.difficulty}</span>
           </li>
         </ul>
       </div>

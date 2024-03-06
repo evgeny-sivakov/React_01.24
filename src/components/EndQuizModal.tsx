@@ -14,7 +14,6 @@ export type ModalHandle = {
 }
 
 const EndQuizModal = forwardRef<ModalHandle>(function Modal(props, ref) {
-
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const dialog = useRef<HTMLDialogElement>(null)

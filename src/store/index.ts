@@ -22,8 +22,8 @@ const store = configureStore({
 })
 
 const persistedReducer = persistReducer(persistConfig, statisticsReducer)
-let storeToPersist = createStore(persistedReducer)
-let persistor = persistStore(storeToPersist)
+const storeToPersist = createStore(persistedReducer)
+const persistor = persistStore(storeToPersist)
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

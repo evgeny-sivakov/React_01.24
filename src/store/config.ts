@@ -4,7 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 interface ConfigState {
   type: string //'boolean' | 'multiple' | 'Any'
   difficulty: string //'easy' | 'meduim' | 'hard' | 'Any'
-  category: string 
+  category: string
   categoryID: number | string
   time: number
   amount: number

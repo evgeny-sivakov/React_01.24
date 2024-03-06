@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux'
-
 import StatisticBlock from './StatisticBlock'
 import { useAppSelector } from '../hooks/reduxHooks'
 
