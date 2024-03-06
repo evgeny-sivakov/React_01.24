@@ -5,7 +5,7 @@ interface ConfigState {
   type: string //'boolean' | 'multiple' | 'Any'
   difficulty: string //'easy' | 'meduim' | 'hard' | 'Any'
   category: string 
-  categoryID: number
+  categoryID: number | string
   time: number
   amount: number
 }

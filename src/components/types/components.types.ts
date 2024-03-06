@@ -13,3 +13,21 @@ export interface Input {
   label: string
   key: string
 }
+
+export interface FormDataType {
+  amount: string
+  category: string
+  categoryID: undefined | string
+  difficulty: string
+  type: string
+  time: string
+}
+
+export interface ConvertedFormData {
+  amount: number
+  category: string
+  categoryID: string | number
+  difficulty: string
+  type: string
+  time: number
+}

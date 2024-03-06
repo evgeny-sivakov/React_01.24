@@ -10,6 +10,7 @@ import convertFormData from '../utils/convertFormData'
 import classes from './WelcomeForm.module.css'
 import { FC, FormEvent } from 'react'
 import { Input } from './types/components.types'
+import {FormDataType} from './types/components.types'
 
 interface FormProps {
   inputs: Input[]
@@ -23,12 +24,12 @@ const WelcomeForm: FC<FormProps> = ({ inputs }) => {
 
   function quizConfigSubmitHandler(event: FormEvent) {
     event.preventDefault()
-    
+
     const rawFormData = event.target as HTMLFormElement
     const formData = new FormData(rawFormData)
     const data = Object.fromEntries(formData.entries())
 
-    const currentCategoryObj = receivedInputs.find((input) => input.inputID === 'category')  as Input
+    const currentCategoryObj = receivedInputs.find((input) => input.inputID === 'category') as Input
     const currentCategoryID = currentCategoryObj.options.find((opt) => {
       if (typeof opt !== 'string') {
         opt.name === data.category
@@ -38,7 +39,7 @@ const WelcomeForm: FC<FormProps> = ({ inputs }) => {
     const configData = {
       ...data,
       categoryID: currentCategoryID
-    }
+    } as FormDataType
 
     const convertedData = convertFormData(configData)
 
@@ -57,3 +58,5 @@ const WelcomeForm: FC<FormProps> = ({ inputs }) => {
 }
 
 export default WelcomeForm
+
+
