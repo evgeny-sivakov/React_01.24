@@ -1,6 +1,5 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState, ReactElement } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { decode } from 'html-entities'
 
@@ -9,29 +8,31 @@ import Button from './Button'
 import Timer from './Timer'
 import EndQuizModal from './EndQuizModal'
 import QuestionCounter from './QuestionCounter'
+
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
 import { useConfigData } from '../hooks/useConfigData'
 import { quizActions } from '../store/quiz'
+import { QuestionItem } from './types/components.types'
+import { ModalHandle } from './EndQuizModal'
 
-import classes from './Question.module.css' // split style file
+import classes from './Question.module.css'
 
 const Quiz = () => {
-  const [questions, setQuestions] = useState([
-    {
-      type: '',
-      difficulty: '',
-      category: '',
-      question: '',
-      correct_answer: '',
-      incorrect_answers: []
-    }
-  ])
-  const time = useSelector((state) => state.config.time)
-  const correctAnswers = useSelector((state) => state.quiz.correctAnswers)
+  const [questions, setQuestions] = useState<QuestionItem[]>([{
+    type: 'boolean',
+    difficulty: 'easy',
+    category: '',
+    question: '',
+    correct_answer: '',
+    incorrect_answers: []
+  }])
+
+  const time = useAppSelector((state) => state.config.time)
   const { url } = useConfigData()
 
-  const modal = useRef()
+  const modal = useRef<ModalHandle>(null)
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -43,7 +44,7 @@ const Quiz = () => {
 
       const responseData = await response.json()
       const newQuestions = responseData.results
-      const decodedQuestions = newQuestions.map((question) => {
+      const decodedQuestions = newQuestions.map((question: QuestionItem) => {
         const decodedCategory = decode(question.category)
         const decodedQuestion = decode(question.question)
         const decodedCorrectAnswer = decode(question.correct_answer)
@@ -62,11 +63,11 @@ const Quiz = () => {
   }, [url])
 
   function endQuizHandler() {
-    modal.current.open()
+    modal!.current!.open()
   }
 
-  function onTimerExpired() {
-    dispatch(quizActions.reset(correctAnswers))
+  function onTimerExpired(): void {
+    dispatch(quizActions.reset())
     navigate('/results')
   }
 

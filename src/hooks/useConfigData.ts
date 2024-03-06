@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux'
+import { RootState } from '../store/index'
 
 export const useConfigData = () => {
-  const store = useSelector((state) => state.config)
+  const store = useSelector((state: RootState) => state.config)
 
   const basicURL = 'https://opentdb.com/api.php?'
   let query = ''

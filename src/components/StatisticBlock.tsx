@@ -1,4 +1,16 @@
-const StatisticBlock = ({ title, items }) => {
+import { FC } from 'react'
+
+interface StatisticBlockProps {
+  title: string
+  items: Item[]
+}
+
+interface Item {
+  name: string
+  quantity: number
+}
+
+const StatisticBlock: FC<StatisticBlockProps> = ({ title, items }) => {
   return (
     <article>
       <h2>{title}</h2>

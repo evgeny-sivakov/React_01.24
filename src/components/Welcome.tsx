@@ -4,8 +4,9 @@ import WelcomeForm from './WelcomeForm'
 
 import classes from './Welcome.module.css'
 import { useEffect, useState } from 'react'
+import {Input} from './types/components.types'
 
-const inputs = [
+const initialInputs: Input[] = [
   {
     inputID: 'amount',
     options: ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'],
@@ -39,7 +40,7 @@ const inputs = [
 ]
 
 const Welcome = () => {
-  const [formInputs, setFromInputs] = useState(inputs)
+  const [formInputs, setFromInputs] = useState(initialInputs)
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -51,14 +52,14 @@ const Welcome = () => {
 
       const responseData = await response.json()
       const categoryOptions = responseData.trivia_categories
-      const category = {
+      const category: Input = {
         inputID: 'category',
         options: categoryOptions,
         label: 'Choose a category',
         key: 'i1'
       }
-      inputs[1] = category
-      const updatedInputs = [...inputs]
+      initialInputs[1] = category
+      const updatedInputs = [...initialInputs]
       setFromInputs(updatedInputs)
     }
 

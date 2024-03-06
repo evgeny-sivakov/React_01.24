@@ -1,20 +1,26 @@
-import { useState } from 'react'
+import { FC, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 
 import Button from './Button'
+
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
 import { quizActions } from '../store/quiz'
 import { updateStatisticsData } from '../store/statistics'
+import { QuestionItem } from './types/components.types'
 
 import classes from './Question.module.css'
 
-const shuffle = (array) => {
+function shuffle<T>(array: T[]): T[] {
   return array.sort(() => Math.random() - 0.5)
 }
 
-const Question = ({ questions }) => {
+interface QuestionProps {
+  questions: QuestionItem[]
+}
+
+const Question: FC<QuestionProps> = ({ questions }) => {
   const [questionIndex, setQuestionIndex] = useState(0)
-  const config = useSelector((state) => state.config)
+  const config = useAppSelector((state) => state.config)
 
   const { question, correct_answer, incorrect_answers } = questions[questionIndex]
   const answersToDisplay =
@@ -22,17 +28,17 @@ const Question = ({ questions }) => {
       ? shuffle([...incorrect_answers, correct_answer])
       : [...incorrect_answers, correct_answer]
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  function answerSubmitHandler(event) {
+  function answerSubmitHandler(event: FormEvent) {
     event.preventDefault()
 
     const {
-      target: { innerText }
+      currentTarget: { innerHTML }
     } = event
 
-    if (innerText === correct_answer) {
+    if (innerHTML === correct_answer) {
       dispatch(quizActions.countCorrectAnswer())
     } else {
       dispatch(quizActions.countAnswer())

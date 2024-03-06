@@ -1,30 +1,34 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 
-import classes from './EndQuizModal.module.css'
 import Button from './Button'
 
 import { quizActions } from '../store/quiz'
+import { useAppDispatch } from '../hooks/reduxHooks'
 
-const EndQuizModal = forwardRef(function Modal(props, ref) {
-  const correctAnswers = useSelector((state) => state.quiz.correctAnswers)
+import classes from './EndQuizModal.module.css'
+
+export type ModalHandle = {
+  open: () => void
+}
+
+const EndQuizModal = forwardRef<ModalHandle>(function Modal(props, ref) {
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const dialog = useRef()
+  const dispatch = useAppDispatch()
+  const dialog = useRef<HTMLDialogElement>(null)
 
   useImperativeHandle(ref, () => {
     return {
       open() {
-        dialog.current.showModal()
+        dialog!.current!.showModal()
       }
     }
   })
 
   function confirmationHanlder() {
-    dispatch(quizActions.reset(correctAnswers))
+    dispatch(quizActions.reset())
     navigate('/')
   }
   return createPortal(
@@ -35,7 +39,7 @@ const EndQuizModal = forwardRef(function Modal(props, ref) {
         <Button text="Confirm" type="button" onClick={confirmationHanlder} />
       </form>
     </dialog>,
-    document.getElementById('modal')
+    document.getElementById('modal')!
   )
 })
 

@@ -1,4 +1,8 @@
-const SelectInput = ({ inputID, options, label }) => {
+import { FC } from 'react'
+
+import { Input } from './types/components.types'
+
+const SelectInput: FC<Input> = ({ inputID, options, label }) => {
   return (
     <select name={inputID} id={inputID} aria-label={label}>
       <option value={label}>{label}</option>

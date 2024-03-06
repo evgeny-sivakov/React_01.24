@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Form, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { configActions } from '../store/config'
@@ -8,20 +8,32 @@ import Button from './Button'
 import convertFormData from '../utils/convertFormData'
 
 import classes from './WelcomeForm.module.css'
+import { FC, FormEvent } from 'react'
+import { Input } from './types/components.types'
 
-const WelcomeForm = ({ inputs }) => {
+interface FormProps {
+  inputs: Input[]
+}
+
+const WelcomeForm: FC<FormProps> = ({ inputs }) => {
+  const receivedInputs = inputs
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  function quizConfigSubmitHandler(event) {
+  function quizConfigSubmitHandler(event: FormEvent) {
     event.preventDefault()
-
-    const formData = new FormData(event.target)
+    
+    const rawFormData = event.target as HTMLFormElement
+    const formData = new FormData(rawFormData)
     const data = Object.fromEntries(formData.entries())
 
-    const currentCategoryID = inputs
-      .find((input) => input.inputID === 'category')
-      .options.find((opt) => opt.name === data.category)?.id
+    const currentCategoryObj = receivedInputs.find((input) => input.inputID === 'category')  as Input
+    const currentCategoryID = currentCategoryObj.options.find((opt) => {
+      if (typeof opt !== 'string') {
+        opt.name === data.category
+      }
+    })
 
     const configData = {
       ...data,

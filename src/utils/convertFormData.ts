@@ -1,3 +1,13 @@
+/* import { FC } from "react"
+
+interface FormDataProps {
+  amount: number | string
+  category: string
+  categoryID: number
+  difficulty: string
+  type: string
+  time: number
+} */
 function convertFormData(data) {
   let { amount, category, categoryID, difficulty, type, time } = data
 

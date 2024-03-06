@@ -1,8 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
+
+
+interface quizState {
+  answers: number
+  correctAnswers: number
+  remainingTime: number
+}
+
+const initialState: quizState = {
+  answers: 0,
+  correctAnswers: 0,
+  remainingTime: 0
+}
 
 const quizSlice = createSlice({
   name: 'quiz',
-  initialState: { answers: 0, correctAnswers: 0, remainingTime: 0 },
+  initialState,
   reducers: {
     countCorrectAnswer(state) {
       state.correctAnswers += 1
@@ -11,7 +25,7 @@ const quizSlice = createSlice({
     countAnswer(state) {
       state.answers += 1
     },
-    setRemainingTime(state, action) {
+    setRemainingTime(state, action: PayloadAction<number>) {
       state.remainingTime = action.payload
     },
     reset(state) {

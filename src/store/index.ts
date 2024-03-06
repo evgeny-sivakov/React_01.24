@@ -22,7 +22,10 @@ const store = configureStore({
 })
 
 const persistedReducer = persistReducer(persistConfig, statisticsReducer)
-let storre = createStore(persistedReducer)
-let persistor = persistStore(storre)
+let storeToPersist = createStore(persistedReducer)
+let persistor = persistStore(storeToPersist)
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
 export { store, persistor }
