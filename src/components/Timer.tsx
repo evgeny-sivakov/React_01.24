@@ -23,7 +23,7 @@ const Timer: FC<TimerProps> = ({ time, onTimeExpired }) => {
 
   useEffect(() => {
     if (secondsRemaining > 0) {
-      interval.current = setInterval(() => {
+      interval.current = window.setInterval(() => {
         setSecondsRemaining((prev) => prev - 1)
       }, 1000)
     } else {
