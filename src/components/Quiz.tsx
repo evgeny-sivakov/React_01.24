@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, ReactElement } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { decode } from 'html-entities'
@@ -18,14 +18,16 @@ import { ModalHandle } from './EndQuizModal'
 import classes from './Question.module.css'
 
 const Quiz = () => {
-  const [questions, setQuestions] = useState<QuestionItem[]>([{
-    type: 'boolean',
-    difficulty: 'easy',
-    category: '',
-    question: '',
-    correct_answer: '',
-    incorrect_answers: []
-  }])
+  const [questions, setQuestions] = useState<QuestionItem[]>([
+    {
+      type: 'boolean',
+      difficulty: 'easy',
+      category: '',
+      question: '',
+      correct_answer: '',
+      incorrect_answers: []
+    }
+  ])
 
   const time = useAppSelector((state) => state.config.time)
   const { url } = useConfigData()

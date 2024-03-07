@@ -1,4 +1,4 @@
-import { Form, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { configActions } from '../store/config'
@@ -10,7 +10,7 @@ import convertFormData from '../utils/convertFormData'
 import classes from './WelcomeForm.module.css'
 import { FC, FormEvent } from 'react'
 import { Input } from './types/components.types'
-import {FormDataType} from './types/components.types'
+import { FormDataType } from './types/components.types'
 
 interface FormProps {
   inputs: Input[]
@@ -58,5 +58,3 @@ const WelcomeForm: FC<FormProps> = ({ inputs }) => {
 }
 
 export default WelcomeForm
-
-

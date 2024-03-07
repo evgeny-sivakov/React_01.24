@@ -4,7 +4,7 @@ import WelcomeForm from './WelcomeForm'
 
 import classes from './Welcome.module.css'
 import { useEffect, useState } from 'react'
-import {Input} from './types/components.types'
+import { Input } from './types/components.types'
 
 const initialInputs: Input[] = [
   {
