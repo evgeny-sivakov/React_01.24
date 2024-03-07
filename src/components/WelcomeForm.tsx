@@ -30,18 +30,24 @@ const WelcomeForm: FC<FormProps> = ({ inputs }) => {
     const data = Object.fromEntries(formData.entries())
 
     const currentCategoryObj = receivedInputs.find((input) => input.inputID === 'category') as Input
-    const currentCategoryID = currentCategoryObj.options.find((opt) => {
+    let catId
+
+    currentCategoryObj.options.find((opt) => {
       if (typeof opt !== 'string') {
-        opt.name === data.category
+        if (opt.name === data.category) {
+          catId = opt.id
+        }
       }
     })
 
     const configData = {
       ...data,
-      categoryID: currentCategoryID
+      categoryID: catId
     } as FormDataType
 
     const convertedData = convertFormData(configData)
+
+    console.log(convertedData)
 
     dispatch(configActions.set(convertedData))
     navigate('quiz')
