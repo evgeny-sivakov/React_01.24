@@ -1,10 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
 
-const initialState = {
-  type: 'Type',
-  difficulty: 'Difficulty',
-  category: 'Category',
-  categoryID: 'id',
+interface ConfigState {
+  type: string //'boolean' | 'multiple' | 'Any'
+  difficulty: string //'easy' | 'meduim' | 'hard' | 'Any'
+  category: string
+  categoryID: number | string
+  time: number
+  amount: number
+}
+
+const initialState: ConfigState = {
+  type: 'multiple',
+  difficulty: 'easy',
+  category: '',
+  categoryID: 0,
   time: 0,
   amount: 0
 }
@@ -13,7 +23,7 @@ const configSlice = createSlice({
   name: 'config',
   initialState,
   reducers: {
-    set: (state, action) => {
+    set: (state, action: PayloadAction<ConfigState>) => {
       const { time, amount, difficulty, category, type, categoryID } = action.payload
 
       state.amount = amount

@@ -1,13 +1,12 @@
-import { useSelector } from 'react-redux'
-
 import StatisticBlock from './StatisticBlock'
+import { useAppSelector } from '../hooks/reduxHooks'
 
 import classes from './Statistics.module.css'
 
 const Statistics = () => {
-  const totalQuantity = useSelector((state) => state.statistics.totalQuantity)
-  const correctAnswers = useSelector((state) => state.statistics.correctAnswers)
-  const statistics = useSelector((state) => state.statistics)
+  const totalQuantity = useAppSelector((state) => state.statistics.totalQuantity)
+  const correctAnswers = useAppSelector((state) => state.statistics.correctAnswers)
+  const statistics = useAppSelector((state) => state.statistics)
   const { categories, difficulty, type } = statistics
   const statsToDisplay = [
     ['Categories', categories.byName],
