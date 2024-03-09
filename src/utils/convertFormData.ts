@@ -5,7 +5,7 @@ const convertFormData = (data: FormDataType) => {
 
   const convertedAmount = amount === 'How many questions?' ? 10 : parseInt(amount)
   const convertedCategory = category === 'Choose a category' ? 'Any' : category
-  const convertedCategoryID = categoryID === undefined ? 'Any' : parseInt(categoryID)
+  const convertedCategoryID = categoryID === undefined ? 'Any' : categoryID
   const convertedDifficulty =
     difficulty === 'Choose a difficulty' ? 'Any' : difficulty.toLowerCase()
   const convertedType =

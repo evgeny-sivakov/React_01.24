@@ -17,7 +17,7 @@ export interface Input {
 export interface FormDataType {
   amount: string
   category: string
-  categoryID: undefined | string
+  categoryID: undefined | number
   difficulty: string
   type: string
   time: string
